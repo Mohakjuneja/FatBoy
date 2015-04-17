@@ -3,7 +3,14 @@ class Reservation
   include Mongoid::Timestamps
 
   field :date, type: Date
-  field :guests, type: Integer
+  field :slot
+
+#  field :guests, type: Integer
+#  field :booking_time, type: Time
+#  field :user_id
+#  field :restaurant_id
+
+
   field :table_resources, type: Hash 
 
 end
