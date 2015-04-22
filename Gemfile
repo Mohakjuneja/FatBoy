@@ -31,8 +31,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'mongoid', github: 'mongoid/mongoid'
+
 gem 'bson_ext'
+
 gem 'slim'   
+
+gem 'active_model_serializers'
+
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -43,5 +49,18 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+group :test do
+
+  gem "rspec-rails", "~> 2.14"
+
+  gem "factory_girl_rails"
+
+  gem 'ffaker'
+
+  gem "shoulda-matchers"
+
+end
+
 end
 
