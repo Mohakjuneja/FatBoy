@@ -4,10 +4,11 @@ class Restaurant
   include Mongoid::Timestamps
 
   field :name, type: String
-  field :address, type: String
   field :phone_number, type: String
-  field :cuisines, type: Array
+  field :address
+  field :cuisines
   field :cost_for_two, type: Integer
+
   # facilities will include Serves Alcohol, Parking Available, Serves Non Vegetarian etc.  
   field :facilities, type: Array
 

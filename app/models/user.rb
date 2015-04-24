@@ -1,4 +1,4 @@
-class User
+class User 
   
   include Mongoid::Document
   # Include default devise modules. Others available are:
@@ -35,8 +35,18 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
+  before_create :generate_authentication_token!
+  
   field :mobile_number, type: String
+  field :auth_token, type: String
   
-  
+  validates :auth_token, uniqueness: true
+
+  def generate_authentication_token!
+    begin
+      self.auth_token = Devise.friendly_token
+    end while User.where(auth_token: auth_token).first
+  end
+
 
 end
