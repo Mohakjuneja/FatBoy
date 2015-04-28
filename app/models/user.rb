@@ -43,9 +43,10 @@ class User
   validates :auth_token, uniqueness: true
 
   def generate_authentication_token!
-    begin
+    loop do
       auth_token = Devise.friendly_token
-    end while User.where(auth_token: auth_token).first
+      break auth_token unless User.where(auth_token: auth_token).first
+    end
   end
 
 
