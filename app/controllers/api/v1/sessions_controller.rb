@@ -1,5 +1,7 @@
 class Api::V1::SessionsController < ApplicationController
 
+  respond_to :json
+
   def create
     user_password = params[:session][:password]
     user_email = params[:session][:email]

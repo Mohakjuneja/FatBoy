@@ -6,6 +6,8 @@ end
 
 describe Authenticable do
   let(:authentication) { Authentication.new }
+  # subject added later to pass test case 3 (respond with 401)
+  subject { authentication }
 
   describe "#current_user" do
     before do
@@ -34,6 +36,7 @@ describe Authenticable do
     end
 
     it { should respond_with 401 }
+
   end
 
 end
