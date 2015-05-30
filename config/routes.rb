@@ -4,15 +4,22 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  namespace :api, defaults: {format: 'json'}, constraints: {subdomain: 'api'}, path: '/' do
-    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
-      resources :users, only: [:show,:create, :update, :destroy]
+  # namespace :api, defaults: {format: 'json'} , constraints: {subdomain: 'api'}, path: '/' do
+  namespace :api, defaults: {format: 'json'}  do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1) do
+      resources :users, only: [:index,:show,:create, :update, :destroy] do
+        collection do
+          post :create
+          post :forgot_password
+        end        
+      end
+      resources :restaurants
       resources :sessions, :only => [:create, :destroy]
     end
+    scope module: :v2, constraints: ApiConstraints.new(version: 2,  default: true) do
+      resources :restaurants
+    end
   end
-
-
-  resources :restaurants
 
   resources :reservations
 

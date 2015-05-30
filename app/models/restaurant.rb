@@ -23,6 +23,10 @@ class Restaurant
   # { table_capacity, units, minimum_seating_capacity@peak_slot, minimum seating_capacity@regular_slot }
   field :total_table_resources, type: Hash  
 
+  belongs_to :user
+  JsonFields = {except: [:tags, :user_id, :created_at, :updated_at, :deleted_at], only: [:name, :address]}
+
+
 end
 
 

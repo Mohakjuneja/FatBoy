@@ -1,6 +1,11 @@
 class User 
   
   include Mongoid::Document
+  include TokenAuthenticatable
+
+
+  # before_save :ensure_authentication_token
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,6 +15,9 @@ class User
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
 
+  field :authentication_token,       type: String
+  field :authentication_token_expiry,type: Time
+  
   ## Recoverable
   field :reset_password_token,   type: String
   field :reset_password_sent_at, type: Time
@@ -35,18 +43,19 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
-  before_create :generate_authentication_token!
+  # before_create :generate_authentication_token!
   
   field :mobile_number, type: String
-  field :auth_token, type: String
+  has_many :restaurants
+  # field :auth_token, type: String
   
-  validates :auth_token, uniqueness: true
+  # validates :auth_token, uniqueness: true
 
-  def generate_authentication_token!
-    begin
-      auth_token = Devise.friendly_token
-    end while User.where(auth_token: auth_token).first
-  end
+  # def generate_authentication_token!
+  #   begin
+  #     auth_token = Devise.friendly_token
+  #   end while User.where(auth_token: auth_token).first
+  # end
 
 
 end

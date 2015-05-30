@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   include Authenticable
 
-  before_action :authenticate_with_token!
+  # before_action :authenticate_with_token!
 
 
 end

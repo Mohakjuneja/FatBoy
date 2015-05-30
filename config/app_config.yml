@@ -1,0 +1,11 @@
+defaults: &DEFAULTS
+  host: http://localhost:3000
+  timeout_in: 100  # minutes
+test:
+  <<: *DEFAULTS
+
+development:
+  <<: *DEFAULTS
+
+production:
+  <<: *DEFAULTS  

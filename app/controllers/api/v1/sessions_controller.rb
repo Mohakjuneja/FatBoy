@@ -9,7 +9,11 @@ class Api::V1::SessionsController < ApplicationController
 
     if user.valid_password? user_password
       sign_in user, store: false
-      user.generate_authentication_token!
+      if user_signed_in?
+        user.reset_authentication_token! 
+        token = user.authentication_token
+      end      
+      # user.generate_authentication_token!
       user.save
       render json: user, status: 200, location: [:api, user]
     else
@@ -20,7 +24,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def destroy
     user = User.find_by(auth_token: params[:id])
-    user.generate_authentication_token!
+    # user.generate_authentication_token!
     user.save
     head 204
   end
