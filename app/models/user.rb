@@ -57,5 +57,4 @@ class User
   #   end while User.where(auth_token: auth_token).first
   # end
 
-
 end

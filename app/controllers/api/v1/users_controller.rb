@@ -5,6 +5,9 @@ module Api
     skip_before_filter :verify_authenticity_token, only: [ :forgot_password]
     skip_before_filter :authenticate_user!, only: [ :forgot_password]
     skip_before_filter :authienticate_with_user_token, only: [ :forgot_password]
+  
+    before_action :authenticate_with_token!, only: [:update, :destroy]
+    before_action :set_user, only: [:show, :destroy]
 
     respond_to :json
   
